@@ -13,7 +13,13 @@ import {
     SiSnowflake,
     SiApacheairflow,
     SiApachekafka,
-    SiPowerbi
+    SiPowerbi,
+    SiElasticsearch,
+    SiAwsorganizations,
+    SiPytorch,
+    SiHuggingface,
+    SiApachesuperset
+
 } from "react-icons/si";
 import {GrMysql} from "react-icons/gr";
 import {FaGitAlt} from "react-icons/fa";
@@ -37,8 +43,8 @@ const skillsConfig = {
         {
             id: "skills-2",
             className: "skill-icon",
-            icon: <SiMicrosoftsqlserver size={50}/>,
-            text: "MSSQL"
+            icon: <SiElasticsearch size={50}/>,
+            text: "ElasticSearch"
         },
         {
             id: "skills-3",
@@ -49,8 +55,8 @@ const skillsConfig = {
         {
             id: "skills-4",
             className: "skill-icon",
-            icon: <SiMicrosoftazure size={50}/>,
-            text: "Azure"
+            icon: <SiAwsorganizations size={50}/>,
+            text: "AWS"
         },
         {
             id: "skills-5",
@@ -69,14 +75,14 @@ const skillsConfig = {
         {
             id: "skills-6",
             className: "skill-icon",
-            icon: <SiRedis size={50}/>,
-            text: "Redis"
+            icon: <SiPytorch size={50}/>,
+            text: "PyTorch"
         },
         {
             id: "skills-7",
             className: "skill-icon",
-            icon: <SiWindowsterminal size={50}/>,
-            text: "Bash"
+            icon: <SiHuggingface size={50}/>,
+            text: "HuggingFace"
         },
         {
             id: "skills-8",
@@ -125,8 +131,8 @@ const skillsConfig = {
         {
             id: "skills-15",
             className: "skill-icon",
-            icon: <SiPowerbi size={50}/>,
-            text: "Power BI"
+            icon: <SiApachesuperset size={50}/>,
+            text: "Superset BI"
         }
     ]
 }

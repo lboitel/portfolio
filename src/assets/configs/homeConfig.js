@@ -9,70 +9,50 @@ const homeConfig = {
 
     greeting:
         <h1 className="heading">
-            Hi! I'm <strong className="main-name"> Rodrigo Arenas</strong>
+            Hi! I'm <strong className="main-name"> Léo-Paul Boitel</strong>
         </h1>,
     titles: [
         "A Data Scientist",
-        "A Machine Learning Specialist",
+        "A NLP specialist",
         "An Open Source Contributor",
         "A Backend Developer",
-        "A Colombian"
+        "A French"
     ],
     about: {
-        start: "I've been working for over nine years on data science projects. " +
+        start: "I've been working for over 4 years on data science projects. " +
             "I'm excited by learning new things, contributing to the data science community," +
             " and spreading the word of data!",
-        exit: "I'm fluent at Python, SQL databases, BI tools, and more, " +
-            "with a deep interest in machine learning."
+        exit: "I'm fluent at Python, SQL and NoSQL databases, BI tools, and more, " +
+            "with a deep interest in fine-tuning NLP models."
     },
     workTimeline: [
         {
-            id: "work-4",
-            title: "Sr ML Engineer",
-            company: "EPAM",
-            description: "Working to build scalable ML solutions, LLM's, and RAG architectures.",
-            date: "2023-Present",
-            icon: <BiRocket/>,
-            tags: ["ml", "mlops", "python", "azure", "llm", "automl"]
-        },
-        {
-            id: "work-3",
-            title: "Sr Data Scientist",
-            company: "Globant",
-            description: "Build AutoML models and make them available to non-technical " +
-                "users from a graphical interface.",
-            date: "2021-2023",
-            icon: <DiCodeigniter/>,
-            tags: ["ml", "automl", "python", "docker", "redshift", "superset"]
-        },
-        {
             id: "work-2",
-            title: "BI Manager",
-            company: "Rappi",
-            description: "Leading a team of analysts and data scientists to execute different projects, " +
-                "including the construction of ETLs, data lakes, data warehouses, and machine learning models.",
-            date: "2019-2021",
-            icon: <FaMobileAlt/>,
-            tags: ["ml", "airflow", "python", "docker", "snowflake", "postgres", "azure"]
+            title: "Data Scientist",
+            company: "The Blockchain Group",
+            description: "Working to build scalable solutions, LLM's, RAG architectures, ML algorithms...",
+            date: "Jan 2022-Present",
+            icon: <BiRocket/>,
+            tags: ["ml", "mlops", "python", "aws", "llm", "elasticsearch", "docker"]
         },
         {
             id: "work-1",
-            title: "CRM Analytics Coordinator",
-            company: "Avianca",
-            description: "Tech leader of a BI, Data Science and DBA team. " +
-                "Build forecast models, data warehouse and Power BI dashboards.",
-            date: "2018-2019",
-            icon: <GiCommercialAirplane/>,
-            tags: ["ml", "mssql", "python", "docker", "pbi", "azure"]
+            title: "R&D Trainee Data Scientist",
+            company: "Worldline",
+            description: "Working to implement biometric authentication systems through machine learning method " +
+                "and users web behavioral data. POC was sold +700K$",
+            date: "Jan 2021 - Jul 2021",
+            icon: <FaMobileAlt/>,
+            tags: ["ml", "typescript", "python"]
         },
         {
             id: "work-0",
-            title: "BI Analyst",
-            company: "Onelink BPO",
-            description: "Build interactive dashboards, ETLs and SQL queries to show the company KPIs.",
-            date: "2016-2018",
+            title: "Institut Mines-Telecom Nord Europe / Telecom Lille",
+            company: "Computer and Data Science Master's Degree - Engineer",
+            description: "Specialization in Data Science and applied research.",
+            date: "2017-2022",
             icon: <BsClipboardData/>,
-            tags: ["python", "mssql", "pbi", "excel"]
+            tags: ["ml", "dl", "nlp", "python", "java", "C", "C#", "signal processing", "postgres", "azure"]
         }
     ]
 }

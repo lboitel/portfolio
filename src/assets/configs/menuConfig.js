@@ -20,13 +20,13 @@ const menuConfig = {
       icon: <AiOutlineGithub size={35} />,
       className: "nav-text",
     },
-    {
-      id: "menu-2",
-      title: "Blogs",
-      path: "/blogs",
-      icon: <BsMedium size={35} />,
-      className: "nav-text",
-    },
+    // {
+    //   id: "menu-2",
+    //   title: "Blogs",
+    //   path: "/blogs",
+    //   icon: <BsMedium size={35} />,
+    //   className: "nav-text",
+    // },
     {
       id: "menu-3",
       title: "Skills",
