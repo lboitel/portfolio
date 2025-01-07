@@ -2,17 +2,24 @@ import React, { useState } from 'react';
 import { Box, Typography } from '@mui/material';
 
 const StreamerCard = (props) => {
-    const [hoveredId, setHoveredId] = useState(null); // État pour suivre la carte survolée
+    const [loadingCardId, setLoadingCardId] = useState(null); // ID de la carte sur laquelle afficher le GIF
+
+    const handleCardClick = (item) => {
+        setLoadingCardId(item.id); // Définit l'ID de la carte cliquée
+        setTimeout(() => {
+            setLoadingCardId(null); // Cache le GIF après 3 secondes
+            // alert(`Chargement de ${item.text} terminé !`);
+        }, 3000); // Simulation d'une opération de 3 secondes
+    };
 
     return (
         <Box sx={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: 2 }}>
-            
-            {props.config.slice(0, 20).map((item) => ( // Affiche uniquement les 20 premiers streamers
+            {props.config.slice(0, 20).map((item) => (
                 <Box
                     key={item.id}
-                    onMouseEnter={() => setHoveredId(item.id)} // Détecte le survol
-                    onMouseLeave={() => setHoveredId(null)} // Réinitialise lors de la sortie du survol
+                    onClick={() => handleCardClick(item)} // Détecte le clic sur la carte
                     sx={{
+                        position: 'relative', // Permet de positionner le GIF au centre
                         color: '#263238',
                         textAlign: 'center',
                         padding: '1.5rem',
@@ -33,23 +40,33 @@ const StreamerCard = (props) => {
                         {item.text}
                     </Typography>
 
-                    {/* Affichage du message lors du survol */}
-                    {hoveredId === item.id && (
-                        <Typography
-                            variant="caption"
+                    {/* Affichage du GIF au centre de la carte cliquée */}
+                    {loadingCardId === item.id && (
+                        <Box
                             sx={{
-                                marginTop: '1rem',
-                                color: '#757575',
-                                fontSize: '14px',
+                                position: 'absolute',
+                                top: 0,
+                                left: 0,
+                                width: '100%',
+                                height: '100%',
+                                backgroundColor: 'rgba(255, 255, 255, 0.8)', // Fond semi-transparent sur la carte
+                                display: 'flex',
+                                justifyContent: 'center',
+                                alignItems: 'center',
+                                borderRadius: '15px', // Même bordure pour un bon rendu
                             }}
                         >
-                            Bot it up 🤖
-                        </Typography>
+                            <img
+                                src="https://i.gifer.com/ZKZg.gif" // Remplacez par votre propre GIF
+                                alt="Chargement..."
+                                style={{ width: '50px', height: '50px' }}
+                            />
+                        </Box>
                     )}
                 </Box>
             ))}
         </Box>
     );
-}
+};
 
 export default StreamerCard;
