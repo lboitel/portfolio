@@ -4,7 +4,8 @@ import {AiFillGithub, AiFillEye} from "react-icons/ai";
 
 // import sklearnGenetic from "../images/sklearn_genetic_opt.png"
 // import kafkaMl from "../images/kafkaml.png"
-import portfolio from "../images/portfolio.png"
+// import portfolio from "../images/portfolio.png"
+import chess_img from "../images/chess.jpg"
 
 import React from 'react'
 
@@ -93,17 +94,17 @@ const projectConfig = [
     // },
     {
         id: "project-1",
-        title: "My first project",
+        title: "StyleMate",
         links: [
             {
                 name: "repo",
-                // url: "https://github.com/rodrigo-arenas/portfolio",
-                icon: <AiFillGithub/>
+                url: "https://github.com/lboitel/chess-me",
+                icon: <AiFillGithub/>,
             },
             {
                 name: "fork",
-                // url: "https://github.com/rodrigo-arenas/portfolio/fork",
-                icon: <BiGitRepoForked/>
+                url: "https://github.com/lboitel/chess-me/fork",
+                icon: <BiGitRepoForked/>,
             },
             {
                 name: "subscription",
@@ -112,9 +113,8 @@ const projectConfig = [
                 target : "blank"
             }
         ],
-        image: portfolio,
-        description: "Projects are up to be added here.",
-        // target: "_blank"
+        image: chess_img,
+        description: "A project focused on training models to analyze and replicate chess playstyles. \nBuilt using Python, Pychess, Stockfish, and the Chess.com API.",
     }
 ]
 
