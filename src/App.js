@@ -7,6 +7,8 @@ import Projects from './pages/Projects';
 import Skills from './pages/Skills/Skills';
 import Blogs from './pages/Blogs';
 import Footer from './components/Footer/Footer';
+import Project1 from './pages/ProjectsDetails/Project1';
+
 import './App.css';
 
 import React from 'react';
@@ -26,6 +28,7 @@ function App() {
                         <Route path="/projects" exact element={<Projects />} />
                         <Route path="/blogs" exact element={<Blogs />} />
                         <Route path="/skills" exact element={<Skills />} />
+                        <Route path = "/projects/chess-me" exact element={<Project1 />} />
                     </Routes>
                 </Container>
                 <Footer />

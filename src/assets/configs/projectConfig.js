@@ -1,9 +1,9 @@
 import {BiGitRepoForked} from "react-icons/bi";
 import {AiFillGithub, AiFillEye} from "react-icons/ai";
-import {ImBook} from "react-icons/im";
+// import {ImBook} from "react-icons/im";
 
-import sklearnGenetic from "../images/sklearn_genetic_opt.png"
-import kafkaMl from "../images/kafkaml.png"
+// import sklearnGenetic from "../images/sklearn_genetic_opt.png"
+// import kafkaMl from "../images/kafkaml.png"
 import portfolio from "../images/portfolio.png"
 
 import React from 'react'
@@ -107,13 +107,14 @@ const projectConfig = [
             },
             {
                 name: "subscription",
-                // url: "https://github.com/rodrigo-arenas/portfolio/subscription",
-                icon: <AiFillEye/>
+                url: "/projects/chess-me",
+                icon: <AiFillEye/>,
+                target : "blank"
             }
         ],
         image: portfolio,
         description: "Projects are up to be added here.",
-        target: "_blank"
+        // target: "_blank"
     }
 ]
 
