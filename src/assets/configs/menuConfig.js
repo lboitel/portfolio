@@ -2,7 +2,7 @@ import React from "react";
 
 import { AiFillCode, AiFillHome, AiOutlineGithub } from "react-icons/ai";
 
-import { BsMedium } from "react-icons/bs";
+// import { BsMedium } from "react-icons/bs";
 
 const menuConfig = {
   sidebarData: [
