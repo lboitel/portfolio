@@ -25,11 +25,11 @@ const Project1 = () => {
 
     // Handle search input
     const handleSearch = (event) => {
-        const query = event.target.value.toLowerCase();
+        const query = event.target.value ; // .toLowerCase();
         setSearchQuery(query);
 
         const filtered = streamers.filter((streamer) =>
-            streamer.username.toLowerCase().includes(query)
+            streamer.username.toLowerCase().includes(query.toLowerCase())
         );
         setFilteredStreamers(filtered);
     };
