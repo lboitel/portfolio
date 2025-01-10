@@ -104,6 +104,7 @@ const ChessPage = () => {
                     }}
                 >
                     <p style={{ margin: 0, fontWeight: 'bold' }}>{username}'s Style Analysis</p>
+                    <p style={{ margin: '5px 0' }}>Player rating: {playerStats.elo}</p>
                     <p style={{ margin: '5px 0' }}>Number of games analyzed: {playerStats.number_games}</p>
                     <p style={{ margin: '5px 0' }}>Average game length: {playerStats.game_length.toFixed(0)} moves</p>
                     <p style={{ margin: '5px 0' }}>Piece advancement score: {playerStats.piece_advancement.toFixed(0)}</p>
