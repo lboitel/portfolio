@@ -2,20 +2,30 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import Chessboard from 'chessboardjsx';
 import { Chess } from 'chess.js';
+import moveSound from '../../assets/sounds/move-piece.mp3'; // Importation du fichier audio
 
 const ChessPage = () => {
     const { username } = useParams();
     const [game, setGame] = useState(new Chess()); // Instance du jeu d'échecs
-    const [playerStats, setPlayerStats] = useState(null); // État pour stocker les statistiques du joueur
+    const [playerStats, setPlayerStats] = useState(null);
+    const [currentFen, setCurrentFen] = useState(game.fen());
+    const [loadingNextMove, setLoadingNextMove] = useState(false); // Indicateur de chargement du coup IA
+    const moveAudio = new Audio(moveSound);
 
-    // Récupération des statistiques du joueur via l'API Flask
+
+    const playMoveSound = () => {
+        moveAudio.currentTime = 0; // Réinitialise la lecture pour ne pas couper un son précédent
+        moveAudio.play().catch((err) => console.warn('Erreur lors de la lecture du son', err));
+    };
+
+
+    // Récupération des statistiques du joueur
     useEffect(() => {
         const fetchGames = async () => {
             try {
                 const response = await fetch(`http://127.0.0.1:5000/player/analysis?player_name=${username}`);
-                const data = await response.json(); // Récupération des données JSON
-                console.log('Statistiques récupérées :', data);
-                setPlayerStats(data); // Stockage des données dans l'état playerStats
+                const data = await response.json();
+                setPlayerStats(data);
             } catch (error) {
                 console.error('Erreur lors de la récupération des statistiques :', error);
             }
@@ -23,14 +33,46 @@ const ChessPage = () => {
         fetchGames();
     }, [username]);
 
+    // Fonction pour envoyer une requête à l'API pour obtenir le prochain coup de l'IA
+    const fetchNextMove = async (fen) => {
+        setLoadingNextMove(true);
+        try {
+            const response = await fetch(`http://127.0.0.1:5000/next_move?fen=${encodeURIComponent(fen)}`);
+            const data = await response.json();
+            console.log('FEN retourné par l\'IA :', data.fen);
+    
+            if (data.fen) {
+                const newGame = new Chess(data.fen); // Crée une instance basée sur le FEN reçu
+                setGame(newGame); // Met à jour l'état du jeu
+                setCurrentFen(newGame.fen()); // Met à jour la position FEN actuelle
+                playMoveSound(); // Jouer le son après le coup du joueur
+
+            }
+        } catch (error) {
+            console.error('Erreur lors de la récupération du prochain coup :', error);
+        } finally {
+            setLoadingNextMove(false);
+        }
+    };
+
     // Gestion des mouvements d'échecs
     const handleMove = (move) => {
         const newGame = new Chess(game.fen()); // Créer une nouvelle instance basée sur la position actuelle
 
         try {
-            const result = newGame.move(move);
-            setGame(newGame); // Met à jour l'état du jeu si le coup est valide
-            console.log(`Coup joué : ${move.from}-${move.to}`);
+            const result = newGame.move(move); // Le joueur joue son coup
+            if (result) {
+                setGame(newGame); // Met à jour l'état du jeu si le coup est valide
+                setCurrentFen(newGame.fen()); // Met à jour la position FEN actuelle
+                playMoveSound(); // Jouer le son après le coup du joueur
+
+                console.log(`Coup joué par le joueur : ${move.from}-${move.to}`);
+
+                // Appeler l'IA après un délai pour plus de fluidité
+                setTimeout(() => {
+                    fetchNextMove(newGame.fen()); // Requête à l'API avec le dernier FEN
+                }, 500);
+            }
         } catch (error) {
             console.warn(`Coup illégal : ${JSON.stringify(move)}`);
         }
@@ -48,7 +90,6 @@ const ChessPage = () => {
         >
             <h2 style={{ marginBottom: '20px' }}>Playing against {username} 🤖</h2>
 
-            {/* Bulle d'informations en haut à droite */}
             {playerStats && (
                 <div
                     style={{
@@ -65,16 +106,31 @@ const ChessPage = () => {
                     <p style={{ margin: 0, fontWeight: 'bold' }}>{username}'s Style Analysis</p>
                     <p style={{ margin: '5px 0' }}>Number of games analyzed: {playerStats.number_games}</p>
                     <p style={{ margin: '5px 0' }}>Average game length: {playerStats.game_length.toFixed(0)} moves</p>
-                    {/* <p style={{ margin: '5px 0' }}>Central pawns usage: {playerStats.central_pawns.toFixed(0)}%</p> */}
                     <p style={{ margin: '5px 0' }}>Piece advancement score: {playerStats.piece_advancement.toFixed(0)}</p>
                     <p style={{ margin: '5px 0' }}>Queen moves per game: {playerStats.queen_moves.toFixed(0)}</p>
                     <p style={{ margin: '5px 0' }}>Trades per game: {playerStats.trades.toFixed(0)}</p>
                 </div>
             )}
 
+            {/* {loadingNextMove && (
+                <div
+                    style={{
+                        position: 'absolute',
+                        bottom: '20px',
+                        backgroundColor: '#ffcc00',
+                        padding: '10px 20px',
+                        borderRadius: '10px',
+                        boxShadow: '0px 4px 8px rgba(0, 0, 0, 0.1)',
+                    }}
+                >
+                    Calcul du prochain coup...
+                </div>
+            )} */}
+
             <Chessboard
                 width={400}
-                position={game.fen()} // Position actuelle de l'échiquier
+                position={currentFen} // Utilisation de la position FEN actuelle
+                draggable={game.turn() === 'w'} // Permet de déplacer les pièces uniquement si c'est le tour du joueur
                 onDrop={({ sourceSquare, targetSquare }) =>
                     handleMove({
                         from: sourceSquare,
