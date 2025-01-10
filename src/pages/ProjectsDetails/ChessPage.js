@@ -23,7 +23,8 @@ const ChessPage = () => {
     useEffect(() => {
         const fetchGames = async () => {
             try {
-                const response = await fetch(`http://127.0.0.1:5000/player/analysis?player_name=${username}`);
+                // const response = await fetch(`http://127.0.0.1:5000/player/analysis?player_name=${username}`);
+                const response = await fetch(`/api/player/analysis?player_name=${username}`);
                 const data = await response.json();
                 setPlayerStats(data);
             } catch (error) {
@@ -37,7 +38,8 @@ const ChessPage = () => {
     const fetchNextMove = async (fen) => {
         setLoadingNextMove(true);
         try {
-            const response = await fetch(`http://127.0.0.1:5000/next_move?fen=${encodeURIComponent(fen)}`);
+            // const response = await fetch(`http://127.0.0.1:5000/next_move?fen=${encodeURIComponent(fen)}`);
+            const response = await fetch('/api/next_move?fen=' + encodeURIComponent(fen));
             const data = await response.json();
             console.log('FEN retourné par l\'IA :', data.fen);
     
