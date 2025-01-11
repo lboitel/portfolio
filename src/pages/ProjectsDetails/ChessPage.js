@@ -85,50 +85,73 @@ const ChessPage = () => {
             style={{
                 position: 'relative',
                 display: 'flex',
+                flexDirection: 'column', // Empile les éléments verticalement
                 alignItems: 'center',
                 padding: '20px',
-                flexDirection: 'column',
             }}
         >
-            <h2 style={{ marginBottom: '20px' }}>Playing against {username} 🤖</h2>
-
-            {playerStats && (
-                <div
-                    style={{
-                        position: 'absolute',
-                        top: '20px',
-                        right: '20px',
-                        padding: '15px',
-                        backgroundColor: '#2b2b2b',
-                        color: 'white',
-                        borderRadius: '10px',
-                        boxShadow: '0px 4px 12px rgba(0, 0, 0, 0.2)',
-                    }}
-                >
-                    <p style={{ margin: 0, fontWeight: 'bold' }}>{username}'s Style Analysis</p>
-                    <p style={{ margin: '5px 0' }}>Player rating: {playerStats.elo}</p>
-                    <p style={{ margin: '5px 0' }}>Number of games analyzed: {playerStats.number_games}</p>
-                    <p style={{ margin: '5px 0' }}>Average game length: {playerStats.game_length.toFixed(0)} moves</p>
-                    <p style={{ margin: '5px 0' }}>Piece advancement score: {playerStats.piece_advancement.toFixed(0)}</p>
-                    <p style={{ margin: '5px 0' }}>Queen moves per game: {playerStats.queen_moves.toFixed(0)}</p>
-                    <p style={{ margin: '5px 0' }}>Trades per game: {playerStats.trades.toFixed(0)}</p>
+            <h2 style={{ marginBottom: '20px', textAlign: 'center' }}>Playing against {username} 🤖</h2>
+    
+            <div
+                style={{
+                    display: 'flex',
+                    flexDirection: 'column',
+                    gap: '20px', // Ajoute un espace entre l'échiquier et la bulle
+                    alignItems: 'center',
+                    maxWidth: '100%', // Empêche le dépassement horizontal
+                }}
+            >
+                {/* Échiquier */}
+                <div style={{
+                    display: 'flex',
+                    justifyContent: 'center',
+                    maxWidth: '100%',
+                    padding: '10px', // Espacement autour de l'échiquier
+                    boxSizing: 'border-box',
+                }}>
+                    <Chessboard
+                        width={400}
+                        position={currentFen}
+                        draggable={game.turn() === 'w'}
+                        onDrop={({ sourceSquare, targetSquare }) =>
+                            handleMove({
+                                from: sourceSquare,
+                                to: targetSquare,
+                                promotion: 'q', // Promotion par défaut en reine
+                            })
+                        }
+                    />
                 </div>
-            )}
-
-            <Chessboard
-                width={400}
-                position={currentFen} // Utilisation de la position FEN actuelle
-                draggable={game.turn() === 'w'} // Permet de déplacer les pièces uniquement si c'est le tour du joueur
-                onDrop={({ sourceSquare, targetSquare }) =>
-                    handleMove({
-                        from: sourceSquare,
-                        to: targetSquare,
-                        promotion: 'q', // Promotion par défaut en reine
-                    })
-                }
-            />
+    
+                {/* Bulle des statistiques */}
+                {playerStats && (
+                    <div
+                        style={{
+                            width: '100%',
+                            maxWidth: '400px', // Largeur maximale de la bulle
+                            backgroundColor: '#2b2b2b',
+                            color: 'white',
+                            padding: '15px',
+                            borderRadius: '10px',
+                            boxShadow: '0px 4px 12px rgba(0, 0, 0, 0.2)',
+                            textAlign: 'left', // Alignement du texte
+                        }}
+                    >
+                        <p style={{ margin: 0, fontWeight: 'bold', textAlign: 'center' }}>
+                            {username}'s Style Analysis
+                        </p>
+                        <p style={{ margin: '5px 0' }}>Player rating: {playerStats.elo}</p>
+                        <p style={{ margin: '5px 0' }}>Number of games analyzed: {playerStats.number_games}</p>
+                        <p style={{ margin: '5px 0' }}>Average game length: {playerStats.game_length.toFixed(0)} moves</p>
+                        <p style={{ margin: '5px 0' }}>Piece advancement score: {playerStats.piece_advancement.toFixed(0)}</p>
+                        <p style={{ margin: '5px 0' }}>Queen moves per game: {playerStats.queen_moves.toFixed(0)}</p>
+                        <p style={{ margin: '5px 0' }}>Trades per game: {playerStats.trades.toFixed(0)}</p>
+                    </div>
+                )}
+            </div>
         </div>
     );
+    
 };
 
 export default ChessPage;
