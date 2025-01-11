@@ -24,7 +24,7 @@ const ChessPage = () => {
         const fetchGames = async () => {
             try {
                 // const response = await fetch(`http://127.0.0.1:5000/player/analysis?player_name=${username}`);
-                const response = await fetch(`/api/player/analysis?player_name=${username}`);
+                const response = await fetch(`https://noisette.bio/api/player/analysis?player_name=${username}`);
                 const data = await response.json();
                 setPlayerStats(data);
             } catch (error) {
@@ -39,7 +39,7 @@ const ChessPage = () => {
         setLoadingNextMove(true);
         try {
             // const response = await fetch(`http://127.0.0.1:5000/next_move?fen=${encodeURIComponent(fen)}`);
-            const response = await fetch('/api/next_move?fen=' + encodeURIComponent(fen));
+            const response = await fetch('https://noisette.bio/api/next_move?fen=' + encodeURIComponent(fen));
             const data = await response.json();
             console.log('FEN retourné par l\'IA :', data.fen);
     
@@ -47,12 +47,12 @@ const ChessPage = () => {
                 const newGame = new Chess(data.fen); // Crée une instance basée sur le FEN reçu
                 setGame(newGame); // Met à jour l'état du jeu
                 setCurrentFen(newGame.fen()); // Met à jour la position FEN actuelle
-                playMoveSound(); // Jouer le son après le coup du joueur
 
             }
         } catch (error) {
             console.error('Erreur lors de la récupération du prochain coup :', error);
         } finally {
+            playMoveSound(); // Jouer le son après le coup du joueur
             setLoadingNextMove(false);
         }
     };
@@ -114,21 +114,6 @@ const ChessPage = () => {
                     <p style={{ margin: '5px 0' }}>Trades per game: {playerStats.trades.toFixed(0)}</p>
                 </div>
             )}
-
-            {/* {loadingNextMove && (
-                <div
-                    style={{
-                        position: 'absolute',
-                        bottom: '20px',
-                        backgroundColor: '#ffcc00',
-                        padding: '10px 20px',
-                        borderRadius: '10px',
-                        boxShadow: '0px 4px 8px rgba(0, 0, 0, 0.1)',
-                    }}
-                >
-                    Calcul du prochain coup...
-                </div>
-            )} */}
 
             <Chessboard
                 width={400}
