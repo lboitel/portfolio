@@ -45,16 +45,15 @@ const Project2 = () => {
                     console.log('Image envoyée avec succès :', data);
                 })
                 .catch((error) => {
-                    console.error("Erreur lors de l'envoi de l'image :", error);
+                    console.error('Erreur lors de l\'envoi de l\'image :', error);
                 });
         }
     };
 
     return (
-        
-        <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', height: '100vh', backgroundColor: '#f0f0f0' }}>
+        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', backgroundColor: '#f0f0f0', padding: '20px', height: '100vh', overflow: 'auto' }}>
             {/* Diagramme des probabilités */}
-            <div style={{ width: '80%', maxWidth: '800px', marginBottom: '30px' }}>
+            <div style={{ width: '80%', maxWidth: '800px', marginTop: '30px', marginBottom: '30px' }}>
                 <h3 style={{ textAlign: 'center', marginBottom: '20px', color: '#263238' }}>Top 3 Pays Probables</h3>
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
                     <div style={{ display: 'flex', alignItems: 'center' }}>
@@ -74,7 +73,7 @@ const Project2 = () => {
                     </div>
                 </div>
             </div>
-            
+
             {/* Carrousel */}
             <div style={{ width: '80%', maxWidth: '800px' }}>
                 <Slider {...settings}>
@@ -90,7 +89,7 @@ const Project2 = () => {
                                     boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)', 
                                     transform: 'scale(0.9)', // Réduction de la taille des images
                                     cursor: 'pointer', // Indicateur de clic
-                                    border: selectedImage === image ? '2px solid #000000' : 'none', // Contour si sélectionnée
+                                    border: selectedImage === image ? '2px solid #263238' : 'none', // Contour si sélectionnée
                                 }}
                             />
                         </div>
@@ -102,7 +101,7 @@ const Project2 = () => {
             <button 
                 onClick={handleSubmit} 
                 style={{ 
-                    marginTop: '50px', 
+                    marginTop: '30px', 
                     padding: '10px 20px', 
                     fontSize: '16px', 
                     backgroundColor: '#263238', 
@@ -113,7 +112,7 @@ const Project2 = () => {
                 }}
                 disabled={!selectedImage} // Désactiver si aucune image n'est sélectionnée
             >
-                Where am I ?!
+                Where am I ?
             </button>
         </div>
     );
