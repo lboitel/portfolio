@@ -8,6 +8,7 @@ import Skills from './pages/Skills/Skills';
 import Blogs from './pages/Blogs';
 import Footer from './components/Footer/Footer';
 import Project1 from './pages/ProjectsDetails/Project1';
+import Project2 from './pages/ProjectsDetails/Project2';
 import ChessPage from './pages/ProjectsDetails/ChessPage';
 
 import './App.css';
@@ -31,6 +32,7 @@ function App() {
                         <Route path="/skills" exact element={<Skills />} />
                         <Route path = "/projects/chess-me" exact element={<Project1 />} />
                         <Route path="/play/:username" element={<ChessPage />} />
+                        <Route path="/projects/geoguess" exact element = {<Project2 />} />
 
                     </Routes>
                 </Container>

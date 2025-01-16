@@ -63,35 +63,35 @@ const projectConfig = [
     //     description: "Project for real-time anomaly detection using kafka and python.",
     //     target: "_blank"
     // },
-    // {
-    //     id: "project-2",
-    //     title: "Pyworkforce",
-    //     links: [
-    //         {
-    //             name: "repo",
-    //             url: "https://github.com/rodrigo-arenas/pyworkforce",
-    //             icon: <AiFillGithub/>
-    //         },
-    //         {
-    //             name: "fork",
-    //             url: "https://github.com/rodrigo-arenas/pyworkforce/fork",
-    //             icon: <BiGitRepoForked/>
-    //         },
-    //         {
-    //             name: "subscription",
-    //             url: "https://github.com/rodrigo-arenas/pyworkforce/subscription",
-    //             icon: <AiFillEye/>
-    //         },
-    //         {
-    //             name: "docs",
-    //             url: "https://pyworkforce.readthedocs.io/en/stable/",
-    //             icon: <ImBook/>,
-    //         }
-    //     ],
-    //     image: "https://miro.medium.com/max/1400/1*UDnhOFK35IbAPx15wkMgVg.jpeg",
-    //     description: "Standard tools for workforce management, queuing, scheduling, rostering and optimization problems.",
-    //     target: "_blank"
-    // },
+    {
+        id: "project-2",
+        title: "Geo Yes'sir",
+        links: [
+            {
+                name: "repo",
+                url: "https://github.com/lboitel/geoguess",
+                icon: <AiFillGithub/>
+            },
+            // {
+            //     name: "fork",
+            //     url: "https://github.com/rodrigo-arenas/pyworkforce/fork",
+            //     icon: <BiGitRepoForked/>
+            // },
+            {
+                name: "subscription",
+                url: "/projects/geoguess",
+                icon: <AiFillEye/>,
+                target: "blank"
+            },
+            // {
+            //     name: "docs",
+            //     url: "https://pyworkforce.readthedocs.io/en/stable/",
+            //     icon: <ImBook/>,
+            // }
+        ],
+        image: "https://miro.medium.com/max/1400/1*UDnhOFK35IbAPx15wkMgVg.jpeg",
+        description: "Training models to predict the country associated with an uploaded Google Streetview image. \nMade with ❤️ using Python, Tensorflow, Gmaps API, and Google Cloud Platform."
+    },
     {
         id: "project-1",
         title: "StyleMate",
