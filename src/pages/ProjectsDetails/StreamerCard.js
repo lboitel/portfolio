@@ -6,10 +6,10 @@ const StreamerCard = (props) => {
     const navigate = useNavigate();
 
     const handleCardClick = async (streamerId) => {
-        console.log(`http://127.0.0.1:5000/player/analysis?player_name=${streamerId}`);
-        const response = await fetch(`http://127.0.0.1:5000/player/analysis?player_name=${streamerId}`);
-        const data = await response.json();
-        console.log(data)
+        // console.log(`https://noisette.bio/api/player/analysis?player_name=${streamerId}`);
+        // const response = await fetch(`https://noisette.bio/api/player/analysis?player_name=${streamerId}`);
+        // const data = await response.json();
+        // console.log(data)
         navigate(`/play/${streamerId}`);
     };
 
