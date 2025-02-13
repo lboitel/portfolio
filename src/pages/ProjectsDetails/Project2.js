@@ -73,24 +73,38 @@ const Project2 = () => {
     ];
 
     // Fonction pour envoyer l'image via une requête POST
-    const handleSubmit = () => {
-        if (selectedImage) {
-            fetch('https://example.com/api/upload', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({ image: selectedImage }),
-            })
-                .then((response) => response.json())
-                .then((data) => {
-                    console.log('Image envoyée avec succès :', data);
-                })
-                .catch((error) => {
-                    console.error('Erreur lors de l\'envoi de l\'image :', error);
-                });
+    const handleFileChange = (event) => {
+        const file = event.target.files[0]; // Récupère le fichier sélectionné
+        if (file) {
+            setSelectedImage(file); // Stocke le fichier pour l'envoyer au backend
         }
     };
+
+    // Fonction pour ouvrir l'explorateur de fichiers
+    const handleUploadClick = () => {
+        document.getElementById('fileInput').click();
+    };
+
+    // Fonction pour envoyer l'image via une requête POST
+    const handleSubmit = () => {
+        if (selectedImage) {
+            const formData = new FormData();
+            formData.append('image', selectedImage);
+
+            fetch('http://localhost:4001/predict', {
+                method: 'POST',
+                body: formData, // Ne pas ajouter Content-Type, il est géré automatiquement
+            })
+            .then((response) => response.json())
+            .then((data) => {
+                console.log('Image envoyée avec succès :', data);
+            })
+            .catch((error) => {
+                console.error("Erreur lors de l'envoi de l'image :", error);
+            });
+        }
+    };
+    
 
     return (
         <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', backgroundColor: '#f0f0f0', padding: '20px', height: '100vh', overflow: 'auto' }}>
@@ -122,9 +136,18 @@ const Project2 = () => {
                 </Slider>
             </div>
 
+
+            <input 
+                id="fileInput" 
+                type="file" 
+                accept="image/*" 
+                style={{ display: 'none' }} 
+                onChange={handleFileChange} 
+            />
+
             {/* Boutons */}
             <div style={{ display: 'flex', gap: '10px', marginTop: '30px' }}>
-                <button 
+                <button
                     onClick={handleSubmit} 
                     style={{ 
                         padding: '10px 20px', 
@@ -139,7 +162,9 @@ const Project2 = () => {
                 >
                     Where am I ?
                 </button>
+
                 <button 
+                    onClick={handleUploadClick}
                     style={{ 
                         padding: '10px 20px', 
                         fontSize: '16px', 
@@ -150,9 +175,20 @@ const Project2 = () => {
                         cursor: 'pointer' 
                     }}
                 >
-                    Play my rules
+                    Play with my picture
+                </button>
+
+
+                <button 
+                    onClick={handleSubmit} 
+                    disabled={!selectedImage} 
+                    style={{ padding: '10px', backgroundColor: selectedImage ? '#007BFF' : '#CCC' }}>
+                    
+                    Envoyer l'image
                 </button>
             </div>
+
+            
         </div>
     );
 };
